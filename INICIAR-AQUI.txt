@@ -1,0 +1,20 @@
+GEOPOINT — TRABALHO G2 — FRONTEND REACT + BACKEND JAVA
+
+1) Instale Node.js 20.19+ (ou 22.12+), Docker Desktop e deixe o Docker aberto.
+2) Abra a pasta geopoint-g2 no VS Code.
+3) No terminal, entre em backend: cd backend
+4) Execute: docker compose up --build -d
+   Isso inicializa PostgreSQL e a API Java.
+5) Teste http://localhost:8080/api/points — deve exibir [] no começo.
+6) Abra OUTRO terminal na pasta principal geopoint-g2.
+7) Execute: npm install
+8) Copie .env.example para .env (no Windows PowerShell: Copy-Item .env.example .env)
+9) Execute: npm run dev
+10) Acesse http://localhost:5173
+
+Se a API der erro, execute: cd backend; docker compose logs -f api
+Para parar a API: cd backend; docker compose down
+
+IMPORTANTE: este pacote utiliza o backend Java/Spring/PostgreSQL que você enviou.
+O comando antigo 'cd backend && npm start' NÃO serve para esse backend.
+Leia README.md para entrega, prints e solução de problemas.

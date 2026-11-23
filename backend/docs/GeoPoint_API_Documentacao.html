@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!-- saved from url=(0104)https://static.plataforma.grupoa.education/imed_prod/imed_prod/c5619a50-a3fc-46de-bbe7-21d65692ec0b.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Documentação dos endpoints REST da API GeoPoint.">
+  <title>GeoPoint API — Documentação</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #65718a;
+      --line: #e3e8f1;
+      --primary: #3157c8;
+      --code-bg: #101827;
+      --code-text: #e5edf9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    header {
+      background: linear-gradient(135deg, #172b59, #3157c8);
+      color: white;
+      padding: 42px 22px 36px;
+    }
+    .header-inner, main { max-width: 1040px; margin: 0 auto; }
+    .eyebrow { color: #cbd8ff; text-transform: uppercase; letter-spacing: .12em; font-size: .76rem; font-weight: 700; }
+    h1 { margin: 8px 0 4px; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; }
+    header p { margin: 8px 0 0; color: #e0e8ff; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .chip { border: 1px solid #ffffff55; border-radius: 999px; padding: 4px 11px; font-size: .82rem; }
+    main { padding: 28px 22px 64px; }
+    section, .endpoint {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      margin: 18px 0;
+      box-shadow: 0 5px 18px #172b5908;
+    }
+    h2 { margin: 0 0 14px; font-size: 1.35rem; }
+    h3 { margin: 0; font-size: 1.08rem; }
+    p { margin: 8px 0 12px; }
+    .muted { color: var(--muted); }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .base-url {
+      display: inline-block; background: #edf2ff; color: #203d9b;
+      border-radius: 7px; padding: 5px 9px; font-weight: 650;
+    }
+    .endpoint-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+    .method {
+      min-width: 66px; text-align: center; color: white; border-radius: 6px;
+      padding: 3px 9px; font: 700 .78rem/1.8 ui-monospace, monospace;
+    }
+    .post { background: #16845b; } .get { background: #2865bd; }
+    .put { background: #a56a0b; } .delete { background: #bd3947; }
+    .path { font: 650 1rem ui-monospace, monospace; overflow-wrap: anywhere; }
+    .status { display: inline-block; color: #3157c8; background: #edf2ff; border-radius: 5px; padding: 2px 8px; font: 700 .78rem ui-monospace, monospace; }
+    pre {
+      overflow-x: auto; background: var(--code-bg); color: var(--code-text);
+      padding: 16px; border-radius: 9px; font-size: .86rem; line-height: 1.55;
+      margin: 10px 0 14px;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: #46536c; background: #f7f9fc; font-size: .84rem; }
+    .table-wrap { overflow-x: auto; }
+    ul { padding-left: 22px; }
+    footer { text-align: center; color: var(--muted); padding: 8px 20px 30px; font-size: .85rem; }
+    @media (max-width: 620px) {
+      section, .endpoint { padding: 17px; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="eyebrow">Documentação da API REST</div>
+      <h1>GeoPoint API</h1>
+      <p>Cadastro, consulta, atualização e exclusão de pontos geográficos.</p>
+      <div class="chips">
+        <span class="chip">REST</span><span class="chip">JSON</span><span class="chip">CRUD</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Visão geral</h2>
+      <p><strong>Recurso:</strong> <code>/api/points</code></p>
+      <p class="muted">Os exemplos abaixo utilizam JSON. Ajuste a URL base conforme o ambiente em que a API estiver executando.</p>
+    </section>
+
+    <section>
+      <h2>Modelo de requisição — PointRequest</h2>
+      <p>Utilizado nos endpoints de criação e atualização. O identificador não deve ser enviado: ele é gerado pela API.</p>
+      <pre><code>{
+  "name": "Praça Central",
+  "description": "Praça principal da cidade",
+  "latitude": -28.2825,
+  "longitude": -52.7869
+}</code></pre>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Descrição</th></tr></thead>
+          <tbody>
+            <tr><td><code>name</code></td><td>String</td><td>Sim</td><td>Nome do ponto (máx. 100 caracteres).</td></tr>
+            <tr><td><code>description</code></td><td>String</td><td>Não</td><td>Descrição do ponto (máx. 255 caracteres).</td></tr>
+            <tr><td><code>latitude</code></td><td>BigDecimal</td><td>Sim</td><td>Latitude entre -90 e 90.</td></tr>
+            <tr><td><code>longitude</code></td><td>BigDecimal</td><td>Sim</td><td>Longitude entre -180 e 180.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Modelo de resposta — PointResponse</h2>
+      <p>Retornado nas operações de criação, consulta e atualização.</p>
+      <pre><code>{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Praça Central",
+  "description": "Praça principal da cidade",
+  "latitude": -28.2825,
+  "longitude": -52.7869
+}</code></pre>
+      <p class="muted">O campo <code>id</code> é um UUID gerado automaticamente pela API.</p>
+    </section>
+
+    <h2 style="margin:30px 2px 10px">Endpoints</h2>
+
+    <article class="endpoint">
+      <div class="endpoint-head"><span class="method post">POST</span><span class="path">/api/points</span></div>
+      <h3>Cadastrar um ponto geográfico</h3>
+      <p>Cria um novo ponto geográfico.</p>
+      <p><strong>Request Body</strong></p>
+      <pre><code>{
+  "name": "Praça Central",
+  "description": "Praça principal da cidade",
+  "latitude": -28.2825,
+  "longitude": -52.7869
+}</code></pre>
+      <p><strong>Response</strong> <span class="status">201 Created</span></p>
+      <pre><code>{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Praça Central",
+  "description": "Praça principal da cidade",
+  "latitude": -28.2825,
+  "longitude": -52.7869
+}</code></pre>
+    </article>
+
+    <article class="endpoint">
+      <div class="endpoint-head"><span class="method get">GET</span><span class="path">/api/points</span></div>
+      <h3>Listar todos os pontos geográficos</h3>
+      <p>Retorna todos os pontos cadastrados. Não possui Request Body.</p>
+      <p><strong>Response</strong> <span class="status">200 OK</span></p>
+      <pre><code>[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Praça Central",
+    "description": "Praça principal da cidade",
+    "latitude": -28.2825,
+    "longitude": -52.7869
+  },
+  {
+    "id": "650e8400-e29b-41d4-a716-446655440001",
+    "name": "Parque Municipal",
+    "description": "Área verde da cidade",
+    "latitude": -28.2850,
+    "longitude": -52.7900
+  }
+]</code></pre>
+      <p class="muted">Se não houver registros, retorna uma lista vazia: <code>[]</code>.</p>
+    </article>
+
+    <article class="endpoint">
+      <div class="endpoint-head"><span class="method get">GET</span><span class="path">/api/points/{id}</span></div>
+      <h3>Consultar um ponto específico</h3>
+      <p>Retorna os dados de um ponto a partir do seu UUID. Não possui Request Body.</p>
+      <p><strong>Exemplo:</strong> <code>GET /api/points/550e8400-e29b-41d4-a716-446655440000</code></p>
+      <p><strong>Response</strong> <span class="status">200 OK</span></p>
+      <pre><code>{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Praça Central",
+  "description": "Praça principal da cidade",
+  "latitude": -28.2825,
+  "longitude": -52.7869
+}</code></pre>
+    </article>
+
+    <article class="endpoint">
+      <div class="endpoint-head"><span class="method put">PUT</span><span class="path">/api/points/{id}</span></div>
+      <h3>Atualizar um ponto geográfico</h3>
+      <p>Atualiza os dados de um ponto existente, identificado pelo UUID informado na URL.</p>
+      <p><strong>Request Body</strong></p>
+      <pre><code>{
+  "name": "Praça Central Atualizada",
+  "description": "Praça central revitalizada",
+  "latitude": -28.2830,
+  "longitude": -52.7875
+}</code></pre>
+      <p><strong>Response</strong> <span class="status">200 OK</span></p>
+      <pre><code>{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "Praça Central Atualizada",
+  "description": "Praça central revitalizada",
+  "latitude": -28.2830,
+  "longitude": -52.7875
+}</code></pre>
+    </article>
+
+    <article class="endpoint">
+      <div class="endpoint-head"><span class="method delete">DELETE</span><span class="path">/api/points/{id}</span></div>
+      <h3>Excluir um ponto geográfico</h3>
+      <p>Exclui um ponto a partir do UUID informado na URL.</p>
+      <p><strong>Exemplo:</strong> <code>DELETE /api/points/550e8400-e29b-41d4-a716-446655440000</code></p>
+      <p>Não possui Request Body.</p>
+      <p><strong>Response</strong> <span class="status">204 No Content</span></p>
+      <p class="muted">Não retorna conteúdo no corpo da resposta.</p>
+    </article>
+
+    <section>
+      <h2>Resumo dos endpoints</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Método</th><th>Endpoint</th><th>Operação</th><th>Status de sucesso</th></tr></thead>
+          <tbody>
+            <tr><td><span class="method post">POST</span></td><td><code>/api/points</code></td><td>Cadastrar ponto</td><td>201 Created</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/points</code></td><td>Listar pontos</td><td>200 OK</td></tr>
+            <tr><td><span class="method get">GET</span></td><td><code>/api/points/{id}</code></td><td>Consultar ponto</td><td>200 OK</td></tr>
+            <tr><td><span class="method put">PUT</span></td><td><code>/api/points/{id}</code></td><td>Atualizar ponto</td><td>200 OK</td></tr>
+            <tr><td><span class="method delete">DELETE</span></td><td><code>/api/points/{id}</code></td><td>Excluir ponto</td><td>204 No Content</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Orientações para integração com o frontend</h2>
+      <ul>
+        <li>Enviar e receber dados no formato JSON.</li>
+        <li>Não enviar o campo <code>id</code> no cadastro ou na atualização: a API gera e mantém o identificador.</li>
+        <li>Utilizar o UUID retornado pela API para consultar, atualizar ou excluir um ponto.</li>
+        <li>Enviar latitude e longitude como valores numéricos, não como strings.</li>
+        <li>Utilizar latitude e longitude para posicionar os pontos em um mapa.</li>
+      </ul>
+      <p class="muted"><strong>Observação:</strong> esta documentação representa os contratos atuais dos endpoints. O tratamento padronizado de erros (por exemplo, ponto não encontrado ou dados inválidos) ainda poderá ser definido na API.</p>
+    </section>
+  </main>
+  <footer>GeoPoint API · Documentação de integração</footer>
+
+
+</body></html>

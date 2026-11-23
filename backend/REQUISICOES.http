@@ -1,0 +1,37 @@
+### GeoPoint API — execute na ordem, usando o UUID retornado pelo POST.
+@baseUrl = http://localhost:8080
+@pointId = SUBSTITUA_PELO_UUID_RETORNADO
+
+### Cadastrar — 201 Created
+POST {{baseUrl}}/api/points
+Content-Type: application/json
+
+{
+  "name": "Praça Central",
+  "description": "Praça principal da cidade",
+  "latitude": -28.2825,
+  "longitude": -52.7869
+}
+
+### Listar — 200 OK
+GET {{baseUrl}}/api/points
+
+### Consultar — 200 OK
+GET {{baseUrl}}/api/points/{{pointId}}
+
+### Alterar — 200 OK
+PUT {{baseUrl}}/api/points/{{pointId}}
+Content-Type: application/json
+
+{
+  "name": "Praça Central Renovada",
+  "description": "Espaço revitalizado",
+  "latitude": -28.283,
+  "longitude": -52.7875
+}
+
+### Excluir — 204 No Content
+DELETE {{baseUrl}}/api/points/{{pointId}}
+
+### Health — 200 OK
+GET {{baseUrl}}/actuator/health
