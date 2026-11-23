@@ -129,22 +129,3 @@ geopoint-g2/
 - Formulário com dados existentes.
 ![alt text](docs/prints/Edição.png)
 
-## Checklist de validação no computador
-
-- [ ] `http://localhost:8080/api/points` retorna `[]` ou uma lista JSON;
-- [ ] Cadastro de ponto aparece na tabela;
-- [ ] Filtro por nome e descrição funciona;
-- [ ] Detalhe e edição carregam os dados do UUID selecionado;
-- [ ] Exclusão retorna à lista e remove o ponto;
-- [ ] Cadastro com nome repetido apresenta mensagem do backend;
-- [ ] Teste em tela de celular e notebook;
-- [ ] Compare aparência com o protótipo Figma do enunciado;
-- [ ] Insira os cinco prints e os nomes reais dos alunos;
-- [ ] Publique no GitHub sem `node_modules/`, `dist/` e `.env`.
-
-## Observações sobre origem e testes
-
-- O backend é o **projeto que você anexou**, e não um serviço hospedado verificado como sendo do professor. Ele depende de PostgreSQL e não está publicado na nuvem.
-- O frontend foi adaptado ao contrato e ao formato de erros dessa API. Testes integrados reais ainda dependem de iniciar o Docker e os serviços no computador.
-- A correspondência exata da interface com o protótipo Figma do PDF deve ser verificada visualmente.
-- O arquivo `backend/README.md` contém instruções próprias da API, incluindo publicação. Não confunda as exigências do projeto backend com as exigências deste trabalho frontend.
