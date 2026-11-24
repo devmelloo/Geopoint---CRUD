@@ -116,7 +116,7 @@ geopoint-g2/
 - Confirmação de exclusão, estado atualizado sem recarregar a página e botão salvar desabilitado durante a requisição;
 - CSS responsivo e tabela com rolagem interna em telas estreitas.
 
-## Prints para entregar (obrigatórios)
+## Prints para entregar (obrigatórios).
 
 - Tabela com pontos;
 ![alt text](docs/prints/Listagem.png)
